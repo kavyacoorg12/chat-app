@@ -18,5 +18,6 @@ import { USER_REPOSITORY } from './repositories/user.repository.js';
       },
     ]),
   ],
+  exports:[USER_REPOSITORY]
 })
 export class UsersModule {}

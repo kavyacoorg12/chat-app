@@ -28,7 +28,7 @@ export class UserRepository implements IUserRepository {
     return {
       id: doc._id.toString(),
       email: doc.email,
-      password: doc.password,
+      passwordHash: doc.passwordHash,
       createdAt: doc.createdAt,
       updatedAt: doc.updatedAt,
     };

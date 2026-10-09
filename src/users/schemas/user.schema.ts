@@ -12,7 +12,7 @@ export class UserSchema{
   @Prop({
     required:true
   })
-  password:string
+  passwordHash:string
   createdAt!:Date
   updatedAt!:Date
 }
