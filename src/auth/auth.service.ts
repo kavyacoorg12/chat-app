@@ -1,4 +1,4 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { SignupDto } from './dto/signup.dto.js';
 import {
   USER_REPOSITORY,
@@ -10,12 +10,15 @@ import {
   PASSWORD_HASHER,
 } from './hasher/password.hasher.js';
 import { toSignupResponseDto } from './mappers/auth.mappers.js';
+import { LoginDto } from './dto/login.dto.js';
+import { type ITokenService, TOKEN_SERVICE } from './token/token.service.js';
 
 @Injectable()
 export class AuthService {
   constructor(
     @Inject(USER_REPOSITORY) private readonly userRepository: IUserRepository,
     @Inject(PASSWORD_HASHER) private readonly passwordHasher: IPasswordHasher,
+    @Inject(TOKEN_SERVICE) private readonly tokenService:ITokenService
   ) {}
   async signup(dto: SignupDto) {
     const existingUser = await this.userRepository.findByEmail(dto.email);
@@ -29,4 +32,16 @@ export class AuthService {
     });
     return toSignupResponseDto(user);
   }
+  async login(dto:LoginDto){
+    const user=await this.userRepository.findByEmail(dto.email)
+    const password=user?await this.passwordHasher.comparePassword(dto.password,user?.passwordHash):false
+    if(!user||!password)
+    {
+      throw new UnauthorizedException(AUTH_MESSAGES.ERROR.INVALID_CREDENTIALS)
+    }
+    const token=await this.tokenService.sign({id:user.id,email:user.email})
+    return {token}
+  }
 }
+
+
