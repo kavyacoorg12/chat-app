@@ -24,3 +24,6 @@ jobs:
 
       - name: Build application
         run: npm run build
+
+      - name: Build docker image
+        run : docker build -t chat-app .
