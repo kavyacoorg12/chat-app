@@ -45,4 +45,18 @@ export class AuthController {
       message: AUTH_MESSAGES.SUCCESS.LOGIN,
     };
   }
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      path: '/',
+    });
+
+    return {
+      message: AUTH_MESSAGES.SUCCESS.LOGOUT,
+    };
+  }
 }

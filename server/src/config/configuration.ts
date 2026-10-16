@@ -12,5 +12,8 @@ export const appConfig=()=>({
   },
   cookie:{
     cookie_max_age:Number(process.env.COOKIE_MAX_AGE)
+  },
+  frontend:{
+    frontend_url:process.env.FRONTEND_URL
   }
 })
