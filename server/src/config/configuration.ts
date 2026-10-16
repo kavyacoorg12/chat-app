@@ -9,5 +9,8 @@ export const appConfig=()=>({
   jwt:{
     jwt_secret:process.env.JWT_SECRET,
     jwt_expire_in:process.env.JWT_EXPIRE_IN
+  },
+  cookie:{
+    cookie_max_age:Number(process.env.COOKIE_MAX_AGE)
   }
 })

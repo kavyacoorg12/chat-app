@@ -13,5 +13,6 @@ export const AUTH_MESSAGES = {
     PASSWORD_TOO_LONG: 'Password must not exceed 72 characters',
     PASSWORD_UPPERCASE: 'Password must contain at least one uppercase letter',
     PASSWORD_NUMBER: 'Password must contain at least one number',
+    COOKIE_MAX_AGE:'Cookie max age is not configured'
   },
 };
