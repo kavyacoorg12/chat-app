@@ -14,6 +14,8 @@ export class DocumentSchema {
   size: number;
   @Prop({ required: true })
   storagePath: string;
+  @Prop({ required: true })
+  publicId: string;
   @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
   userId: Types.ObjectId;
   @Prop({

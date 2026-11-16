@@ -7,8 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { envValidationSchema } from './config/env.validation.js';
 import { appConfig } from './config/configuration.js';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DocumetModule } from './documet/documet.module.js';
 import { DocumentModule } from './document/document.module.js';
+import { StorageModule } from './common/storage/storage.module.js';
 
 @Module({
   imports: [AuthModule, UsersModule,
@@ -23,8 +23,8 @@ import { DocumentModule } from './document/document.module.js';
        uri:configService.get<string>('db.url')
       })
     }),
-    DocumetModule,
-    DocumentModule
+    DocumentModule,
+    StorageModule
   ],
   controllers: [AppController],
   providers: [AppService],

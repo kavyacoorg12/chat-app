@@ -14,6 +14,7 @@ import { JwtAuthGuard } from '../common/guards/jwt-auth.guard.js';
   imports: [
     UsersModule,
     JwtModule.registerAsync({
+      global:true,
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         secret: configService.getOrThrow<string>('jwt.jwt_secret'),
@@ -38,5 +39,6 @@ import { JwtAuthGuard } from '../common/guards/jwt-auth.guard.js';
       useClass: TokenService,
     },
   ],
+  exports:[JwtModule,JwtAuthGuard]
 })
 export class AuthModule {}

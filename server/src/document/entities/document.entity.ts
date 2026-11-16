@@ -12,6 +12,7 @@ export interface Document {
   mimeType: string;
   size: number;
   storagePath: string;
+  publicId:string,
   userId: string;
   status: DocumentStatus;
   createdAt: Date;

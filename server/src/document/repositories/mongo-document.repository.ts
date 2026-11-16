@@ -42,6 +42,7 @@ private map(doc:DocumentDoc):Document
     mimeType:doc.mimeType,
     size:doc.size,
     storagePath:doc.storagePath,
+    publicId:doc.publicId,
     userId:doc.userId.toString(),
     status:doc.status,
     createdAt:doc.createdAt,
