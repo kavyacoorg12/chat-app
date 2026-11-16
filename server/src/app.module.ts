@@ -7,6 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { envValidationSchema } from './config/env.validation.js';
 import { appConfig } from './config/configuration.js';
 import { MongooseModule } from '@nestjs/mongoose';
+import { DocumetModule } from './documet/documet.module.js';
+import { DocumentModule } from './document/document.module.js';
 
 @Module({
   imports: [AuthModule, UsersModule,
@@ -20,7 +22,9 @@ import { MongooseModule } from '@nestjs/mongoose';
       useFactory:(configService:ConfigService)=>({
        uri:configService.get<string>('db.url')
       })
-    })
+    }),
+    DocumetModule,
+    DocumentModule
   ],
   controllers: [AppController],
   providers: [AppService],

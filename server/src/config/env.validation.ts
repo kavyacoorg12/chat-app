@@ -6,5 +6,8 @@ export const envValidationSchema=Joi.object({
   JWT_SECRET:Joi.string().required(),
   JWT_EXPIRE_IN:Joi.number().positive().required(),
   COOKIE_MAX_AGE:Joi.number().positive().required(),
-  FRONTEND_URL:Joi.string().uri().required()
+  FRONTEND_URL:Joi.string().uri().required(),
+  CLOUDINARY_CLOUD_NAME:Joi.string().required(),
+  CLOUDINARY_API_KEY:Joi.string().required(),
+  CLOUDINARY_API_SECRET:Joi.string().required()
 })
