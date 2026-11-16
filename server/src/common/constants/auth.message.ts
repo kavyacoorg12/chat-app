@@ -6,6 +6,8 @@ export const AUTH_MESSAGES = {
   },
 
   ERROR: {
+    UNAUTHORIZED:'Authentication required',
+    INVALID_TOKEN:'Invalid or expired token',
     EMAIL_ALREADY_EXISTS: 'Email already registered',
     INVALID_CREDENTIALS: 'Invalid email or password',
     INVALID_EMAIL: 'Please provide a valid email address',

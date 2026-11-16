@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { TOKEN_SERVICE } from './token/token.service.js';
 import { TokenService } from './token/jwt.token.service.js';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard.js';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TokenService } from './token/jwt.token.service.js';
   controllers: [AuthController],
   providers: [
     AuthService,
+    JwtAuthGuard,
     {
       provide: PASSWORD_HASHER,
       useClass: BcryptPasswordHasher,

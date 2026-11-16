@@ -1,10 +1,13 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
+  Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
 import { SignupDto } from './dto/signup.dto.js';
@@ -12,6 +15,7 @@ import { LoginDto } from './dto/login.dto.js';
 import { type Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { AUTH_MESSAGES } from '../common/constants/auth.message.js';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard.js';
 
 @Controller('auth')
 export class AuthController {
@@ -58,5 +62,13 @@ export class AuthController {
     return {
       message: AUTH_MESSAGES.SUCCESS.LOGOUT,
     };
+  }
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  getMe(@Req() req:Request & {user:{id:string,email:string}})
+  {
+    return {
+      user:req.user
+    }
   }
 }
