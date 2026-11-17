@@ -6,18 +6,16 @@ import {
   IStorageService,
   StorageUploadResult,
 } from './interface/IStorageService.js';
+import { DOCUMENT_MESSAGES } from '../constants/document.message.js';
 
 @Injectable()
 export class StorageService implements IStorageService {
-
   constructor(private readonly configService: ConfigService) {
     cloudinary.config({
       cloud_name: this.configService.getOrThrow(
         'cloudinary.cloudinary_cloud_name',
       ),
-      api_key: this.configService.getOrThrow(
-        'cloudinary.cloudinary_api_key',
-      ),
+      api_key: this.configService.getOrThrow('cloudinary.cloudinary_api_key'),
       api_secret: this.configService.getOrThrow(
         'cloudinary.cloudinary_api_secret',
       ),
@@ -48,7 +46,22 @@ export class StorageService implements IStorageService {
       uploadStream.end(file.buffer);
     });
   }
+  async download(publicId: string): Promise<Buffer> {
+    const url = cloudinary.url(publicId, {
+      resource_type: 'raw',
+      secure: true,
+    });
+    console.log('Download URL:', url);
+    const response = await fetch(url);
 
+    if (!response.ok) {
+      throw new Error(DOCUMENT_MESSAGES.ERROR.FAILED_TO_DOWNLOAD);
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+
+    return Buffer.from(arrayBuffer);
+  }
   async delete(publicId: string): Promise<void> {
     await cloudinary.uploader.destroy(publicId, {
       resource_type: 'raw',

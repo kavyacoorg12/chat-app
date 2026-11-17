@@ -1,6 +1,6 @@
 export interface IStorageService {
   upload(file: Express.Multer.File): Promise<StorageUploadResult>;
-
+  download(publicId: string): Promise<Buffer>;
   delete(publicId: string): Promise<void>;
 }
 

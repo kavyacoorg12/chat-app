@@ -7,6 +7,8 @@ import { DOCUMENT_REPOSITORY } from './repositories/document.repository.js';
 import { DocumentRepository } from './repositories/mongo-document.repository.js';
 import { StorageModule } from '../common/storage/storage.module.js';
 import { AuthModule } from '../auth/auth.module.js';
+import { PdfExtractionService } from './services/pdf-extraction.service.js';
+import { DocumentProcessingService } from './services/document-processing.service.js';
 
 @Module({
   controllers: [DocumentController],
@@ -26,6 +28,8 @@ import { AuthModule } from '../auth/auth.module.js';
       provide: DOCUMENT_REPOSITORY,
       useClass: DocumentRepository,
     },
+    PdfExtractionService,
+    DocumentProcessingService,
   ],
 })
 export class DocumentModule {}
